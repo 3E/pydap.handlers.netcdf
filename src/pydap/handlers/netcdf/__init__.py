@@ -11,7 +11,7 @@ from pkg_resources import get_distribution
 
 try:
     from netCDF4 import Dataset as netcdf_file
-    attrs = lambda var: {k: getattr(var, k) for k in var.ncattrs()}
+    attrs = lambda var: {k: getattr(var, k) for k in var.ncattrs() if k not in ['scale_factor','offset']}
 except ImportError:
     from pupynere import netcdf_file
     attrs = lambda var: var._attributes
